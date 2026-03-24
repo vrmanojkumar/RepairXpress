@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RepairXpress – Fast Repairs. Right at Your Doorstep.</title>
+<meta name="description" content="RepairXpress is your on-demand electronic device repair marketplace connecting you with nearby repair shops for home service."/>
+<link rel="stylesheet" href="styles.css"/>
+<link rel="stylesheet" href="dashboard.css"/>
+</head>
+<body>
+
+<!-- BG ORBS -->
+<div class="bg-orb bg-orb-1"></div>
+<div class="bg-orb bg-orb-2"></div>
+<div class="bg-orb bg-orb-3"></div>
+
+<!-- ==================== TOAST ==================== -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ==================== SCREEN: SPLASH ==================== -->
+<div class="screen active" id="screen-splash">
+  <div class="splash-container">
+    <div class="splash-orbit">
+      <div class="splash-orbit-ring ring-1"></div>
+      <div class="splash-orbit-ring ring-2"></div>
+      <div class="splash-orbit-ring ring-3"></div>
+      <div class="splash-logo">
+        <div class="splash-logo-icon">⚡</div>
+      </div>
+    </div>
+    <div class="splash-content">
+      <h1 class="splash-title">Repair<span class="gradient-text">Xpress</span></h1>
+      <p class="splash-tagline">Fast Repairs. Right at Your Doorstep.</p>
+      <div class="splash-loader">
+        <div class="splash-loader-bar"></div>
+      </div>
+      <p class="splash-version">v2.0 · Premium Edition</p>
+    </div>
+    <div class="splash-particles" id="splashParticles"></div>
+  </div>
+</div>
+
+<!-- ==================== NAVBAR (SHARED) ==================== -->
+<nav class="navbar" id="mainNavbar" style="display:none;">
+  <div class="navbar-logo" onclick="navigate('screen-home')">
+    <div class="navbar-logo-icon">⚡</div>
+    <span class="navbar-logo-text">Repair<span class="gradient-text">Xpress</span></span>
+  </div>
+  <div class="navbar-links">
+    <button class="navbar-link active" onclick="navigate('screen-home')">Home</button>
+    <button class="navbar-link" onclick="navigate('screen-shops')">Find Shops</button>
+    <button class="navbar-link" onclick="navigate('screen-tracking')">Track Order</button>
+    <button class="navbar-link" onclick="navigate('screen-shop-dashboard')">Shop Portal</button>
+    <button class="navbar-link" onclick="navigate('screen-admin')">Admin</button>
+  </div>
+  <div class="navbar-actions">
+    <button class="btn btn-ghost btn-icon" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+    <button class="btn btn-secondary btn-sm" onclick="showToast('🔔 No new notifications','info')">🔔</button>
+    <div class="avatar-pill" onclick="navigate('screen-home')">
+      <div class="avatar-img">👤</div>
+      <span>Ravi Kumar</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ==================== SCREEN: HOME ==================== -->
+<div class="screen" id="screen-home">
+  <div class="content-inner">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="badge badge-blue" style="margin-bottom:16px;">
+          <span class="pulse-dot"></span> Live in 50+ cities
+        </div>
+        <h1 class="hero-title">Your Device, <br/><span class="gradient-text">Fixed in Hours</span></h1>
+        <p class="hero-sub">Expert repair professionals at your doorstep. Trusted by 1M+ customers.</p>
+        <div class="search-bar-hero">
+          <div class="input-group" style="flex:1;">
+            <span class="input-icon">🔍</span>
+            <input class="input" id="heroSearch" type="text" placeholder="What needs repair? (e.g. iPhone screen)"/>
+          </div>
+          <div class="input-group" style="min-width:160px;">
+            <span class="input-icon">📍</span>
+            <input class="input" type="text" placeholder="Your location" value="Bengaluru, KA"/>
+          </div>
+          <button class="btn btn-primary" onclick="navigate('screen-shops')">Search Shops →</button>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="hero-stat-num gradient-text">1M+</span><span>Happy Customers</span></div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat"><span class="hero-stat-num gradient-text">50K+</span><span>Repairs Done</span></div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat"><span class="hero-stat-num gradient-text">500+</span><span>Expert Shops</span></div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat"><span class="hero-stat-num gradient-text">4.9★</span><span>Average Rating</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-phone-mockup">
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="phone-mini-ui">
+                <div class="phone-mini-header">
+                  <span>🔧 Repair in Progress</span>
+                  <span class="badge badge-green" style="font-size:0.6rem;">Live</span>
+                </div>
+                <div class="phone-mini-progress">
+                  <div class="progress-bar"><div class="progress-fill" style="--target-width:65%;"></div></div>
+                </div>
+                <div class="phone-mini-tech">
+                  <div class="tech-avatar">👨‍🔧</div>
+                  <div>
+                    <div style="font-size:0.7rem;font-weight:600;">Arjun T.</div>
+                    <div style="font-size:0.6rem;color:var(--neon-green);">ETA: 12 min</div>
+                  </div>
+                </div>
+                <div style="font-size:0.65rem;color:var(--text-muted);margin-top:8px;">Screen Repair · ₹799</div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-float-card card-1">⭐ 4.9 Rated</div>
+          <div class="phone-float-card card-2">✅ Verified Shops</div>
+          <div class="phone-float-card card-3">🚀 30 min ETA</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="home-section">
+      <div class="section-header">
+        <div><div class="section-title">Device Categories</div><div class="section-sub">Choose your device type</div></div>
+      </div>
+      <div class="categories-grid">
+        <div class="category-card" onclick="selectDevice('Mobile', this)">
+          <div class="category-icon cat-blue">📱</div>
+          <div class="category-name">Mobile</div>
+          <div class="category-count">120+ services</div>
+        </div>
+        <div class="category-card" onclick="selectDevice('Laptop', this)">
+          <div class="category-icon cat-purple">💻</div>
+          <div class="category-name">Laptop</div>
+          <div class="category-count">80+ services</div>
+        </div>
+        <div class="category-card" onclick="selectDevice('Tablet', this)">
+          <div class="category-icon cat-cyan">🖥️</div>
+          <div class="category-name">Tablet</div>
+          <div class="category-count">60+ services</div>
+        </div>
+        <div class="category-card" onclick="selectDevice('TV', this)">
+          <div class="category-icon cat-green">📺</div>
+          <div class="category-name">Smart TV</div>
+          <div class="category-count">45+ services</div>
+        </div>
+        <div class="category-card" onclick="selectDevice('Speaker', this)">
+          <div class="category-icon cat-pink">🔊</div>
+          <div class="category-name">Speaker</div>
+          <div class="category-count">30+ services</div>
+        </div>
+        <div class="category-card" onclick="selectDevice('Gaming', this)">
+          <div class="category-icon cat-orange">🎮</div>
+          <div class="category-name">Gaming</div>
+          <div class="category-count">25+ services</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Offers Banner -->
+    <section class="home-section">
+      <div class="offers-banner">
+        <div class="offer-card gradient-card-blue" onclick="navigate('screen-services')">
+          <div class="offer-badge">HOT DEAL</div>
+          <h3>📱 Screen Repair</h3>
+          <p>Starting at ₹499</p>
+          <div class="offer-discount">Save 30%</div>
+        </div>
+        <div class="offer-card gradient-card-purple" onclick="navigate('screen-services')">
+          <div class="offer-badge">NEW</div>
+          <h3>💻 Laptop Fix</h3>
+          <p>Starting at ₹699</p>
+          <div class="offer-discount">Free Pickup</div>
+        </div>
+        <div class="offer-card gradient-card-cyan" onclick="navigate('screen-services')">
+          <div class="offer-badge">POPULAR</div>
+          <h3>🔋 Battery Replace</h3>
+          <p>Starting at ₹299</p>
+          <div class="offer-discount">Same Day</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nearby Shops Carousel -->
+    <section class="home-section">
+      <div class="section-header">
+        <div><div class="section-title">Nearby Top Shops</div><div class="section-sub">Based on your location</div></div>
+        <button class="btn btn-ghost btn-sm" onclick="navigate('screen-shops')">See All →</button>
+      </div>
+      <div class="shops-carousel">
+        <div class="shop-card" onclick="navigate('screen-shops')">
+          <div class="shop-card-header" style="background:linear-gradient(135deg,#1e3a5f,#0d2137);">
+            <div class="shop-card-logo">🔧</div>
+            <div class="shop-verified">✓ Verified</div>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-name">TechFix Pro</div>
+            <div class="shop-meta-row">
+              <span class="shop-rating">⭐ 4.9 <span style="color:var(--text-muted)">(312)</span></span>
+              <span class="shop-dist">📍 0.8 km</span>
+            </div>
+            <div class="shop-tags"><span class="chip" style="font-size:0.7rem;padding:3px 8px;">📱 Mobile</span><span class="chip" style="font-size:0.7rem;padding:3px 8px;">💻 Laptop</span></div>
+            <div class="shop-price-row">
+              <span class="shop-price">From ₹299</span>
+              <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();navigate('screen-booking')">Quick Book</button>
+            </div>
+          </div>
+        </div>
+        <div class="shop-card" onclick="navigate('screen-shops')">
+          <div class="shop-card-header" style="background:linear-gradient(135deg,#2d1b69,#1a0d40);">
+            <div class="shop-card-logo">⚡</div>
+            <div class="shop-verified">✓ Verified</div>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-name">Spark Repairs</div>
+            <div class="shop-meta-row">
+              <span class="shop-rating">⭐ 4.8 <span style="color:var(--text-muted)">(208)</span></span>
+              <span class="shop-dist">📍 1.2 km</span>
+            </div>
+            <div class="shop-tags"><span class="chip" style="font-size:0.7rem;padding:3px 8px;">📱 Mobile</span><span class="chip" style="font-size:0.7rem;padding:3px 8px;">🔊 Audio</span></div>
+            <div class="shop-price-row">
+              <span class="shop-price">From ₹249</span>
+              <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();navigate('screen-booking')">Quick Book</button>
+            </div>
+          </div>
+        </div>
+        <div class="shop-card" onclick="navigate('screen-shops')">
+          <div class="shop-card-header" style="background:linear-gradient(135deg,#0d3b2e,#062218);">
+            <div class="shop-card-logo">🛠️</div>
+            <div class="shop-verified">✓ Verified</div>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-name">Gadget Guru</div>
+            <div class="shop-meta-row">
+              <span class="shop-rating">⭐ 4.7 <span style="color:var(--text-muted)">(156)</span></span>
+              <span class="shop-dist">📍 2.1 km</span>
+            </div>
+            <div class="shop-tags"><span class="chip" style="font-size:0.7rem;padding:3px 8px;">💻 Laptop</span><span class="chip" style="font-size:0.7rem;padding:3px 8px;">🖥️ Tablet</span></div>
+            <div class="shop-price-row">
+              <span class="shop-price">From ₹399</span>
+              <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();navigate('screen-booking')">Quick Book</button>
+            </div>
+          </div>
+        </div>
+        <div class="shop-card" onclick="navigate('screen-shops')">
+          <div class="shop-card-header" style="background:linear-gradient(135deg,#3b1f0d,#210d00);">
+            <div class="shop-card-logo">💡</div>
+            <div class="shop-verified">✓ Verified</div>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-name">iRepair Zone</div>
+            <div class="shop-meta-row">
+              <span class="shop-rating">⭐ 4.6 <span style="color:var(--text-muted)">(89)</span></span>
+              <span class="shop-dist">📍 3.5 km</span>
+            </div>
+            <div class="shop-tags"><span class="chip" style="font-size:0.7rem;padding:3px 8px;">📱 Apple</span><span class="chip" style="font-size:0.7rem;padding:3px 8px;">💻 MacBook</span></div>
+            <div class="shop-price-row">
+              <span class="shop-price">From ₹599</span>
+              <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();navigate('screen-booking')">Quick Book</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Book CTA -->
+    <section class="home-section">
+      <div class="cta-banner">
+        <div class="cta-text">
+          <h2>Need an urgent fix? 🚨</h2>
+          <p>Book a technician now and get your device repaired today</p>
+        </div>
+        <button class="btn btn-primary btn-lg" onclick="navigate('screen-services')">Book Now →</button>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ==================== SCREEN: SERVICE SELECTION ==================== -->
+<div class="screen" id="screen-services">
+  <div class="content-inner" style="max-width:900px;margin:0 auto;padding:24px;">
+    <div class="page-header">
+      <button class="btn btn-ghost btn-icon" onclick="navigate('screen-home')">←</button>
+      <div>
+        <h2 class="text-2xl font-bold">Select Service</h2>
+        <p class="text-secondary text-sm">What issue are you facing?</p>
+      </div>
+    </div>
+
+    <!-- Device Type Chips -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0;">
+      <button class="chip active" onclick="selectChip(this,'Mobile')">📱 Mobile</button>
+      <button class="chip" onclick="selectChip(this,'Laptop')">💻 Laptop</button>
+      <button class="chip" onclick="selectChip(this,'Tablet')">🖥️ Tablet</button>
+      <button class="chip" onclick="selectChip(this,'TV')">📺 Smart TV</button>
+    </div>
+
+    <!-- Issues Grid -->
+    <div class="grid grid-3 gap-16" id="servicesGrid">
+      <div class="service-issue-card" onclick="selectIssue('Screen Repair',799,this)">
+        <div class="issue-icon">📱</div>
+        <div class="issue-name">Screen Repair</div>
+        <div class="issue-desc">Cracked or broken display replacement with genuine parts</div>
+        <div class="issue-price-row">
+          <span class="issue-price">₹799</span>
+          <span class="issue-time">⏱ 2 hrs</span>
+        </div>
+        <div class="issue-tags"><span class="badge badge-green">Most Popular</span></div>
+      </div>
+      <div class="service-issue-card" onclick="selectIssue('Battery Replacement',399,this)">
+        <div class="issue-icon">🔋</div>
+        <div class="issue-name">Battery Replacement</div>
+        <div class="issue-desc">Original battery for extended life and performance</div>
+        <div class="issue-price-row">
+          <span class="issue-price">₹399</span>
+          <span class="issue-time">⏱ 1 hr</span>
+        </div>
+        <div class="issue-tags"><span class="badge badge-blue">Quick Fix</span></div>
+      </div>
+      <div class="service-issue-card" onclick="selectIssue('Charging Port Fix',299,this)">
+        <div class="issue-icon">🔌</div>
+        <div class="issue-name">Charging Port Fix</div>
+        <div class="issue-desc">Charging port repair or replacement for all models</div>
+        <div class="issue-price-row">
+          <span class="issue-price">₹299</span>
+          <span class="issue-time">⏱ 1 hr</span>
+        </div>
+        <div class="issue-tags"><span class="badge badge-purple">Budget</span></div>
+      </div>
+      <div class="service-issue-card" onclick="selectIssue('Speaker / Mic Fix',349,this)">
+        <div class="issue-icon">🔊</div>
+        <div class="issue-name">Speaker / Mic Fix</div>
+        <div class="issue-desc">Fix no sound or distorted audio issues</div>
+        <div class="issue-price-row">
+          <span class="issue-price">₹349</span>
+          <span class="issue-time">⏱ 1.5 hrs</span>
+        </div>
+        <div class="issue-tags"></div>
+      </div>
+      <div class="service-issue-card" onclick="selectIssue('Camera Repair',549,this)">
+        <div class="issue-icon">📷</div>
+        <div class="issue-name">Camera Repair</div>
+        <div class="issue-desc">Front/rear camera module replacement</div>
+        <div class="issue-price-row">
+          <span class="issue-price">₹549</span>
+          <span class="issue-time">⏱ 2 hrs</span>
+        </div>
+        <div class="issue-tags"></div>
+      </div>
+      <div class="service-issue-card" onclick="selectIssue('Water Damage Fix',699,this)">
+        <div class="issue-icon">💧</div>
+        <div class="issue-name">Water Damage Fix</div>
+        <div class="issue-desc">Deep clean + component drying + repair</div>
+        <div class="issue-price-row">
+          <span class="issue-price">₹699</span>
+          <span class="issue-time">⏱ 3 hrs</span>
+        </div>
+        <div class="issue-tags"><span class="badge badge-orange">Premium</span></div>
+      </div>
+    </div>
+
+    <!-- Price Summary Floating Card -->
+    <div class="price-summary-card" id="priceSummary" style="display:none;">
+      <div>
+        <div class="text-sm text-muted">Selected Service</div>
+        <div class="font-bold" id="selectedServiceName">–</div>
+      </div>
+      <div>
+        <div class="text-sm text-muted">Estimated Price</div>
+        <div class="font-bold gradient-text text-xl" id="selectedServicePrice">₹0</div>
+      </div>
+      <button class="btn btn-primary" onclick="navigate('screen-shops')">Find Shops →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SCREEN: SHOP LISTING ==================== -->
+<div class="screen" id="screen-shops">
+  <div class="content-inner" style="max-width:1100px;margin:0 auto;padding:24px;">
+    <div class="page-header">
+      <button class="btn btn-ghost btn-icon" onclick="navigate('screen-home')">←</button>
+      <div>
+        <h2 class="text-2xl font-bold">Nearby Repair Shops</h2>
+        <p class="text-secondary text-sm">12 shops found near Bengaluru</p>
+      </div>
+      <div class="input-group" style="width:260px;">
+        <span class="input-icon">🔍</span>
+        <input class="input" type="text" placeholder="Search shops..."/>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters-bar">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+        <span class="text-sm text-muted">Filters:</span>
+        <button class="chip active" onclick="toggleFilter(this)">All</button>
+        <button class="chip" onclick="toggleFilter(this)">⭐ 4.5+</button>
+        <button class="chip" onclick="toggleFilter(this)">📍 &lt; 2km</button>
+        <button class="chip" onclick="toggleFilter(this)">💰 &lt; ₹500</button>
+        <button class="chip" onclick="toggleFilter(this)">✅ Verified</button>
+        <button class="chip" onclick="toggleFilter(this)">🚀 Express</button>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span class="text-sm text-muted">Sort:</span>
+        <select class="input" style="width:auto;padding:8px 12px;font-size:0.85rem;">
+          <option>Relevance</option><option>Rating</option><option>Distance</option><option>Price: Low</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Shop List -->
+    <div class="shops-list-grid">
+      <div class="shop-list-card" onclick="navigate('screen-booking')">
+        <div class="slc-banner" style="background:linear-gradient(135deg,#1e3a5f,#0d2137);"></div>
+        <div class="slc-logo">🔧</div>
+        <div class="slc-body">
+          <div style="display:flex;justify-content:space-between;align-items:start;gap:8px;">
+            <div>
+              <div class="slc-name">TechFix Pro</div>
+              <div class="slc-address">📍 MG Road, Bengaluru · 0.8 km away</div>
+            </div>
+            <div class="slc-rating">⭐ 4.9</div>
+          </div>
+          <div class="slc-tags">
+            <span class="badge badge-green">✓ Verified</span>
+            <span class="badge badge-blue">🚀 Express</span>
+            <span class="badge badge-purple">📱 Mobile</span>
+            <span class="badge badge-purple">💻 Laptop</span>
+          </div>
+          <div class="slc-footer">
+            <div>
+              <div class="slc-price">From ₹299</div>
+              <div class="text-sm text-muted">312 reviews · Opens 9AM–9PM</div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();navigate('screen-booking')">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="shop-list-card" onclick="navigate('screen-booking')">
+        <div class="slc-banner" style="background:linear-gradient(135deg,#2d1b69,#1a0d40);"></div>
+        <div class="slc-logo">⚡</div>
+        <div class="slc-body">
+          <div style="display:flex;justify-content:space-between;align-items:start;gap:8px;">
+            <div>
+              <div class="slc-name">Spark Repairs</div>
+              <div class="slc-address">📍 Koramangala, Bengaluru · 1.2 km away</div>
+            </div>
+            <div class="slc-rating">⭐ 4.8</div>
+          </div>
+          <div class="slc-tags">
+            <span class="badge badge-green">✓ Verified</span>
+            <span class="badge badge-purple">📱 Mobile</span>
+            <span class="badge badge-purple">🔊 Audio</span>
+          </div>
+          <div class="slc-footer">
+            <div>
+              <div class="slc-price">From ₹249</div>
+              <div class="text-sm text-muted">208 reviews · Opens 10AM–8PM</div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();navigate('screen-booking')">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="shop-list-card" onclick="navigate('screen-booking')">
+        <div class="slc-banner" style="background:linear-gradient(135deg,#0d3b2e,#062218);"></div>
+        <div class="slc-logo">🛠️</div>
+        <div class="slc-body">
+          <div style="display:flex;justify-content:space-between;align-items:start;gap:8px;">
+            <div>
+              <div class="slc-name">Gadget Guru</div>
+              <div class="slc-address">📍 HSR Layout, Bengaluru · 2.1 km away</div>
+            </div>
+            <div class="slc-rating">⭐ 4.7</div>
+          </div>
+          <div class="slc-tags">
+            <span class="badge badge-green">✓ Verified</span>
+            <span class="badge badge-blue">🖥️ Tablet</span>
+            <span class="badge badge-purple">💻 Laptop</span>
+          </div>
+          <div class="slc-footer">
+            <div>
+              <div class="slc-price">From ₹399</div>
+              <div class="text-sm text-muted">156 reviews · Opens 9AM–10PM</div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();navigate('screen-booking')">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="shop-list-card" onclick="navigate('screen-booking')">
+        <div class="slc-banner" style="background:linear-gradient(135deg,#3b1f0d,#210d00);"></div>
+        <div class="slc-logo">💡</div>
+        <div class="slc-body">
+          <div style="display:flex;justify-content:space-between;align-items:start;gap:8px;">
+            <div>
+              <div class="slc-name">iRepair Zone</div>
+              <div class="slc-address">📍 Indiranagar, Bengaluru · 3.5 km away</div>
+            </div>
+            <div class="slc-rating">⭐ 4.6</div>
+          </div>
+          <div class="slc-tags">
+            <span class="badge badge-green">✓ Verified</span>
+            <span class="badge badge-orange">📱 Apple Specialist</span>
+            <span class="badge badge-purple">💻 MacBook</span>
+          </div>
+          <div class="slc-footer">
+            <div>
+              <div class="slc-price">From ₹599</div>
+              <div class="text-sm text-muted">89 reviews · Opens 10AM–7PM</div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();navigate('screen-booking')">Book Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SCREEN: BOOKING ==================== -->
+<div class="screen" id="screen-booking">
+  <div class="content-inner" style="max-width:800px;margin:0 auto;padding:24px;">
+    <div class="page-header">
+      <button class="btn btn-ghost btn-icon" onclick="navigate('screen-shops')">←</button>
+      <div><h2 class="text-2xl font-bold">Confirm Booking</h2><p class="text-secondary text-sm">Review your order details</p></div>
+    </div>
+    <div class="booking-layout">
+      <div class="booking-form">
+        <!-- Service Summary -->
+        <div class="glass-card p-20 mb-16">
+          <div class="section-title mb-12">📋 Service Summary</div>
+          <div class="booking-summary-row"><span>Device</span><span class="font-semibold">📱 Samsung Galaxy S21</span></div>
+          <div class="booking-summary-row"><span>Issue</span><span class="font-semibold">Screen Repair</span></div>
+          <div class="booking-summary-row"><span>Shop</span><span class="font-semibold">TechFix Pro ⭐4.9</span></div>
+          <div class="booking-summary-row"><span>Est. Duration</span><span class="font-semibold">~2 hours</span></div>
+        </div>
+
+        <!-- Address -->
+        <div class="glass-card p-20 mb-16">
+          <div class="section-title mb-12">📍 Service Address</div>
+          <div class="input-group mb-12">
+            <span class="input-icon">🏠</span>
+            <input class="input" type="text" placeholder="Flat / House No." value="42B, 3rd Floor"/>
+          </div>
+          <div class="input-group mb-12">
+            <span class="input-icon">📍</span>
+            <input class="input" type="text" placeholder="Street / Area" value="12th Cross, Koramangala"/>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+            <input class="input" type="text" placeholder="City" value="Bengaluru"/>
+            <input class="input" type="text" placeholder="Pincode" value="560034"/>
+          </div>
+          <button class="btn btn-secondary btn-sm">📡 Auto-detect Location</button>
+        </div>
+
+        <!-- Date Time -->
+        <div class="glass-card p-20 mb-16">
+          <div class="section-title mb-12">📅 Schedule</div>
+          <div class="date-picker-row">
+            <div class="date-chip active">Today<br/><span>Mar 24</span></div>
+            <div class="date-chip">Tomorrow<br/><span>Mar 25</span></div>
+            <div class="date-chip">Wed<br/><span>Mar 26</span></div>
+            <div class="date-chip">Thu<br/><span>Mar 27</span></div>
+          </div>
+          <div class="time-picker-row">
+            <div class="time-slot active">9 AM</div>
+            <div class="time-slot">10 AM</div>
+            <div class="time-slot">11 AM</div>
+            <div class="time-slot">12 PM</div>
+            <div class="time-slot">2 PM</div>
+            <div class="time-slot">4 PM</div>
+            <div class="time-slot">6 PM</div>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="glass-card p-20">
+          <div class="section-title mb-12">📝 Additional Notes</div>
+          <textarea class="input" rows="3" placeholder="Describe the issue in detail (optional)..."></textarea>
+        </div>
+      </div>
+
+      <!-- Price Card Sidebar -->
+      <div>
+        <div class="glass-card p-20 booking-price-card">
+          <div class="section-title mb-16">💰 Price Estimate</div>
+          <div class="price-row"><span>Screen Repair</span><span>₹799</span></div>
+          <div class="price-row"><span>Platform fee</span><span>₹29</span></div>
+          <div class="price-row"><span>Technician visit</span><span style="color:var(--neon-green)">FREE</span></div>
+          <div class="price-divider"></div>
+          <div class="price-row total"><span>Total</span><span class="gradient-text">₹828</span></div>
+          <div class="promo-input">
+            <input class="input" type="text" placeholder="🎟️ Promo code"/>
+            <button class="btn btn-secondary btn-sm">Apply</button>
+          </div>
+          <button class="btn btn-primary btn-full btn-lg" onclick="confirmBooking()" style="margin-top:16px;">⚡ Confirm Booking</button>
+          <p style="font-size:0.75rem;color:var(--text-muted);text-align:center;margin-top:10px;">Pay after service completion</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SCREEN: TRACKING ==================== -->
+<div class="screen" id="screen-tracking">
+  <div class="content-inner" style="max-width:800px;margin:0 auto;padding:24px;">
+    <div class="page-header">
+      <button class="btn btn-ghost btn-icon" onclick="navigate('screen-home')">←</button>
+      <div><h2 class="text-2xl font-bold">Track Order</h2><p class="text-secondary text-sm">Order #RX2024031401</p></div>
+      <span class="badge badge-blue"><span class="pulse-dot"></span> Live</span>
+    </div>
+
+    <!-- Map UI -->
+    <div class="map-container mb-16">
+      <div class="map-grid"></div>
+      <div class="map-dot" style="left:20%;top:60%;"></div>
+      <div class="map-dot" style="left:70%;top:35%;background:var(--neon-green);box-shadow:0 0 12px var(--neon-green);"></div>
+      <div class="map-route"></div>
+      <div style="position:absolute;bottom:12px;left:12px;background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--glass-border);border-radius:var(--radius-lg);padding:8px 12px;font-size:0.78rem;">
+        <span style="color:var(--neon-blue);">📍 Your Location</span> → <span style="color:var(--neon-green);">🔧 Technician</span>
+      </div>
+      <div style="position:absolute;top:12px;right:12px;background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--glass-border);border-radius:var(--radius-lg);padding:6px 12px;font-size:0.78rem;font-weight:600;color:var(--neon-cyan);">ETA: 12 min</div>
+    </div>
+
+    <!-- Technician Card -->
+    <div class="glass-card p-20 mb-16">
+      <div style="display:flex;gap:16px;align-items:center;">
+        <div class="tech-card-avatar">👨‍🔧</div>
+        <div style="flex:1;">
+          <div class="font-bold text-lg">Arjun Tiwari</div>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:4px;">
+            <span class="badge badge-green">✅ Verified Tech</span>
+            <span class="text-sm text-muted">⭐ 4.9 · 580 repairs</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-secondary btn-icon" title="Call" onclick="showToast('📞 Calling Arjun...','info')">📞</button>
+          <button class="btn btn-secondary btn-icon" title="Chat" onclick="showToast('💬 Opening chat...','info')">💬</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="glass-card p-20">
+      <div class="section-title mb-16">Order Status</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-line"></div>
+          <div class="timeline-dot done">✓</div>
+          <div class="timeline-content">
+            <div class="timeline-title">Order Requested</div>
+            <div class="timeline-sub">Mar 24 · 10:30 AM</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-line"></div>
+          <div class="timeline-dot done">✓</div>
+          <div class="timeline-content">
+            <div class="timeline-title">Accepted by TechFix Pro</div>
+            <div class="timeline-sub">Mar 24 · 10:35 AM</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-line"></div>
+          <div class="timeline-dot done">✓</div>
+          <div class="timeline-content">
+            <div class="timeline-title">Technician Assigned</div>
+            <div class="timeline-sub">Arjun Tiwari · 10:40 AM</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-line"></div>
+          <div class="timeline-dot active">🔧</div>
+          <div class="timeline-content">
+            <div class="timeline-title" style="color:var(--neon-blue);">In Progress – On the way</div>
+            <div class="timeline-sub">ETA: 12 minutes</div>
+            <div class="progress-bar" style="margin-top:8px;"><div class="progress-fill" style="--target-width:65%;"></div></div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="opacity:0.4;">⭐</div>
+          <div class="timeline-content" style="opacity:0.4;">
+            <div class="timeline-title">Completed</div>
+            <div class="timeline-sub">Pending</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SCREEN: PAYMENT ==================== -->
+<div class="screen" id="screen-payment">
+  <div class="content-inner" style="max-width:600px;margin:0 auto;padding:24px;">
+    <div class="page-header">
+      <button class="btn btn-ghost btn-icon" onclick="navigate('screen-booking')">←</button>
+      <div><h2 class="text-2xl font-bold">Checkout</h2><p class="text-secondary text-sm">Secure payment</p></div>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="glass-card p-20 mb-16">
+      <div class="section-title mb-12">🧾 Order Summary</div>
+      <div class="price-row"><span>Screen Repair – Samsung S21</span><span>₹799</span></div>
+      <div class="price-row"><span>Platform fee</span><span>₹29</span></div>
+      <div class="price-row"><span>Promo (FIRST30)</span><span style="color:var(--neon-green);">-₹240</span></div>
+      <div class="price-divider"></div>
+      <div class="price-row total"><span>Total Payable</span><span class="gradient-text text-xl">₹588</span></div>
+    </div>
+
+    <!-- Payment Methods -->
+    <div class="glass-card p-20 mb-16">
+      <div class="section-title mb-12">💳 Payment Method</div>
+      <div class="payment-methods">
+        <div class="payment-option active" onclick="selectPayment(this)">
+          <div class="payment-icon">📱</div>
+          <div><div class="font-semibold">UPI</div><div class="text-sm text-muted">GPay, PhonePe, Paytm</div></div>
+          <div class="payment-check">✓</div>
+        </div>
+        <div class="payment-option" onclick="selectPayment(this)">
+          <div class="payment-icon">💳</div>
+          <div><div class="font-semibold">Credit / Debit Card</div><div class="text-sm text-muted">Visa, Mastercard, RuPay</div></div>
+          <div class="payment-check" style="display:none;">✓</div>
+        </div>
+        <div class="payment-option" onclick="selectPayment(this)">
+          <div class="payment-icon">🏦</div>
+          <div><div class="font-semibold">Net Banking</div><div class="text-sm text-muted">All major banks</div></div>
+          <div class="payment-check" style="display:none;">✓</div>
+        </div>
+        <div class="payment-option" onclick="selectPayment(this)">
+          <div class="payment-icon">💵</div>
+          <div><div class="font-semibold">Cash on Service</div><div class="text-sm text-muted">Pay after completion</div></div>
+          <div class="payment-check" style="display:none;">✓</div>
+        </div>
+      </div>
+      <div class="upi-input-row">
+        <input class="input" type="text" placeholder="Enter UPI ID (e.g. name@upi)" value="ravi@gpay"/>
+        <button class="btn btn-secondary btn-sm">Verify</button>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-full btn-lg" onclick="processPayment()">
+      🔒 Pay ₹588 Securely
+    </button>
+    <div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;">
+      <span style="font-size:0.75rem;color:var(--text-muted);">🔐 256-bit SSL · Powered by Razorpay</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SCREEN: REVIEW ==================== -->
+<div class="screen" id="screen-review">
+  <div class="content-inner" style="max-width:550px;margin:0 auto;padding:24px;text-align:center;">
+    <!-- Success State -->
+    <div id="review-form-section">
+      <div class="review-success-anim">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+          <circle cx="40" cy="40" r="36" fill="none" stroke="rgba(16,185,129,0.2)" stroke-width="4"/>
+          <circle cx="40" cy="40" r="36" fill="none" stroke="#10b981" stroke-width="4" stroke-dasharray="226" stroke-dashoffset="226" class="success-ring"/>
+          <polyline points="24,40 36,52 56,28" fill="none" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="success-check"/>
+        </svg>
+      </div>
+      <h2 class="text-2xl font-bold" style="margin:16px 0 8px;">Repair Completed! 🎉</h2>
+      <p class="text-secondary" style="margin-bottom:24px;">Your device has been fixed successfully. How was your experience?</p>
+
+      <div class="glass-card p-20" style="margin-bottom:16px;text-align:left;">
+        <div style="text-align:center;margin-bottom:16px;">
+          <div class="text-lg font-semibold mb-8">Rate Arjun Tiwari</div>
+          <div class="stars" style="justify-content:center;font-size:2rem;" id="ratingStars">
+            <span class="star filled" onclick="setRating(1)">★</span>
+            <span class="star filled" onclick="setRating(2)">★</span>
+            <span class="star filled" onclick="setRating(3)">★</span>
+            <span class="star filled" onclick="setRating(4)">★</span>
+            <span class="star empty" onclick="setRating(5)">☆</span>
+          </div>
+          <div class="text-sm text-muted" style="margin-top:8px;" id="ratingText">4 stars – Great!</div>
+        </div>
+        <div class="section-title mb-8">Your Feedback</div>
+        <textarea class="input" rows="3" style="resize:none;" placeholder="Tell us about your experience..."></textarea>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;">
+          <button class="chip" onclick="toggleChip(this)">👍 Professional</button>
+          <button class="chip" onclick="toggleChip(this)">⚡ Fast Service</button>
+          <button class="chip" onclick="toggleChip(this)">💰 Good Value</button>
+          <button class="chip" onclick="toggleChip(this)">🔧 Skilled Tech</button>
+          <button class="chip" onclick="toggleChip(this)">📦 Original Parts</button>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full btn-lg" onclick="submitReview()">Submit Review →</button>
+    </div>
+
+    <!-- Thank You State -->
+    <div id="review-thanks-section" style="display:none;">
+      <div style="font-size:5rem;margin-bottom:16px;animation:float 2s ease infinite;">🙏</div>
+      <h2 class="gradient-text text-3xl font-bold" style="margin-bottom:12px;">Thank You!</h2>
+      <p class="text-secondary" style="margin-bottom:24px;">Your feedback helps us improve and reward top technicians.</p>
+      <div class="glass-card p-20" style="margin-bottom:20px;">
+        <div style="font-size:1.5rem;margin-bottom:8px;">🎁 You earned 50 XP!</div>
+        <div class="text-sm text-muted">RepairXpress Rewards points added to your account</div>
+      </div>
+      <button class="btn btn-primary btn-full" onclick="navigate('screen-home')">Back to Home →</button>
+    </div>
+  </div>
+</div>
+
+<!-- INCLUDE shared scripts + other screens -->
+<script src="app.js"></script>
+</body>
+</html>

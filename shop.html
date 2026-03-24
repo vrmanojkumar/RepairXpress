@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RepairXpress – Shop Dashboard & Admin</title>
+<link rel="stylesheet" href="styles.css"/>
+<link rel="stylesheet" href="dashboard.css"/>
+</head>
+<body>
+<div class="bg-orb bg-orb-1"></div>
+<div class="bg-orb bg-orb-2"></div>
+<div class="bg-orb bg-orb-3"></div>
+
+<!-- ==================== SHOP DASHBOARD ==================== -->
+<div class="dashboard-page active" id="shop-dashboard-page">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-icon">🔧</div>
+        <span class="sidebar-logo-text">TechFix <span style="color:var(--neon-blue);">Pro</span></span>
+      </div>
+      <div class="shop-status-card">
+        <span class="pulse-dot"></span>
+        <span style="font-size:0.82rem;font-weight:600;color:var(--neon-green);">Shop Open</span>
+        <button class="status-toggle-btn" onclick="toggleShopStatus(this)">Close</button>
+      </div>
+    </div>
+
+    <div class="sidebar-section">Main</div>
+    <button class="sidebar-item active" id="sb-overview" onclick="shopTab('overview',this)">
+      <span class="sidebar-item-icon">📊</span><span>Dashboard</span>
+    </button>
+    <button class="sidebar-item" id="sb-orders" onclick="shopTab('orders',this)">
+      <span class="sidebar-item-icon">📋</span><span>Incoming Orders</span>
+      <span class="sidebar-badge">3</span>
+    </button>
+    <button class="sidebar-item" id="sb-services" onclick="shopTab('services',this)">
+      <span class="sidebar-item-icon">🔧</span><span>My Services</span>
+    </button>
+    <button class="sidebar-item" id="sb-earnings" onclick="shopTab('earnings',this)">
+      <span class="sidebar-item-icon">💰</span><span>Earnings</span>
+    </button>
+
+    <div class="sidebar-section">Account</div>
+    <button class="sidebar-item" onclick="window.location.href='index.html'">
+      <span class="sidebar-item-icon">🏠</span><span>User App</span>
+    </button>
+    <button class="sidebar-item" onclick="window.location.href='admin.html'">
+      <span class="sidebar-item-icon">🛡️</span><span>Admin Panel</span>
+    </button>
+
+    <div style="margin-top:auto;padding:8px;">
+      <div style="display:flex;align-items:center;gap:10px;padding:12px;border-radius:var(--radius-xl);background:var(--glass);border:1px solid var(--glass-border);">
+        <div style="font-size:1.5rem;">👨‍💼</div>
+        <div>
+          <div style="font-size:0.85rem;font-weight:700;">Raj Sharma</div>
+          <div style="font-size:0.72rem;color:var(--text-muted);">Shop Owner</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="dashboard-content">
+
+    <!-- TAB: OVERVIEW -->
+    <div id="tab-overview">
+      <div class="section-header mb-24">
+        <div>
+          <h1 class="text-2xl font-bold">Good morning, Raj 👋</h1>
+          <p class="text-secondary text-sm">Here's your business summary for today</p>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-secondary btn-sm" onclick="showToast('📊 Report downloaded!','success')">📥 Export</button>
+          <button class="btn btn-primary btn-sm" onclick="shopTab('orders',document.getElementById('sb-orders'))">View Orders →</button>
+        </div>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="grid grid-4 gap-16 mb-24">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(59,130,246,0.15);">💰</div>
+          <div class="stat-label">Today's Earnings</div>
+          <div class="stat-value gradient-text">₹4,280</div>
+          <div class="stat-change up">↑ 12% vs yesterday</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(249,115,22,0.15);">📋</div>
+          <div class="stat-label">Active Orders</div>
+          <div class="stat-value">3</div>
+          <div class="stat-change up">↑ 2 new today</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(16,185,129,0.15);">✅</div>
+          <div class="stat-label">Completed Jobs</div>
+          <div class="stat-value">8</div>
+          <div class="stat-change up">↑ 100% completion</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(251,191,36,0.15);">⭐</div>
+          <div class="stat-label">Avg Rating</div>
+          <div class="stat-value">4.9</div>
+          <div class="stat-change up">↑ 0.1 this week</div>
+        </div>
+      </div>
+
+      <!-- Chart + Pending -->
+      <div class="grid grid-2 gap-16">
+        <div class="glass-card p-20">
+          <div class="earnings-header">
+            <div>
+              <div class="stat-label">Weekly Revenue</div>
+              <div class="earnings-total gradient-text">₹28,450</div>
+            </div>
+            <div class="chart-tabs">
+              <button class="chart-tab active" onclick="switchChartTab(this,'week')">Week</button>
+              <button class="chart-tab" onclick="switchChartTab(this,'month')">Month</button>
+            </div>
+          </div>
+          <div class="chart-bar" id="weekChart">
+            <div class="chart-bar-item"><div class="chart-bar-fill" style="height:60%;"></div><div class="chart-bar-label">Mon</div></div>
+            <div class="chart-bar-item"><div class="chart-bar-fill" style="height:80%;"></div><div class="chart-bar-label">Tue</div></div>
+            <div class="chart-bar-item"><div class="chart-bar-fill" style="height:45%;"></div><div class="chart-bar-label">Wed</div></div>
+            <div class="chart-bar-item"><div class="chart-bar-fill" style="height:90%;background:linear-gradient(to top,#06b6d4,#3b82f6);"></div><div class="chart-bar-label">Thu</div></div>
+            <div class="chart-bar-item"><div class="chart-bar-fill" style="height:70%;"></div><div class="chart-bar-label">Fri</div></div>
+            <div class="chart-bar-item"><div class="chart-bar-fill" style="height:55%;"></div><div class="chart-bar-label">Sat</div></div>
+            <div class="chart-bar-item"><div class="chart-bar-fill" style="height:40%;"></div><div class="chart-bar-label">Sun</div></div>
+          </div>
+        </div>
+
+        <div class="glass-card p-20">
+          <div class="section-title mb-16">Pending Orders</div>
+          <div class="transaction-item">
+            <div class="txn-icon" style="background:rgba(59,130,246,0.15);">📱</div>
+            <div class="txn-info">
+              <div class="txn-name">Screen Repair – Ravi Kumar</div>
+              <div class="txn-date">📍 Koramangala · Slot: 11 AM</div>
+            </div>
+            <span class="badge badge-orange">Pending</span>
+          </div>
+          <div class="transaction-item">
+            <div class="txn-icon" style="background:rgba(139,92,246,0.15);">💻</div>
+            <div class="txn-info">
+              <div class="txn-name">Laptop Keyboard – Priya S.</div>
+              <div class="txn-date">📍 Indiranagar · Slot: 2 PM</div>
+            </div>
+            <span class="badge badge-blue">Accepted</span>
+          </div>
+          <div class="transaction-item">
+            <div class="txn-icon" style="background:rgba(16,185,129,0.15);">🔋</div>
+            <div class="txn-info">
+              <div class="txn-name">Battery Replace – Amit T.</div>
+              <div class="txn-date">📍 HSR Layout · Slot: 4 PM</div>
+            </div>
+            <span class="badge badge-green">In Progress</span>
+          </div>
+          <button class="btn btn-ghost btn-sm w-full" style="margin-top:8px;" onclick="shopTab('orders',document.getElementById('sb-orders'))">View all orders →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: INCOMING ORDERS -->
+    <div id="tab-orders" style="display:none;">
+      <div class="section-header mb-24">
+        <div><h1 class="text-2xl font-bold">Incoming Orders</h1><p class="text-secondary text-sm">3 orders awaiting your response</p></div>
+        <div style="display:flex;gap:8px;">
+          <button class="chip active">All (3)</button>
+          <button class="chip">Pending (1)</button>
+          <button class="chip">Accepted (2)</button>
+        </div>
+      </div>
+
+      <div class="incoming-order-card">
+        <div class="order-header">
+          <div class="order-user">
+            <div class="order-user-avatar">👤</div>
+            <div>
+              <div class="order-user-name">Ravi Kumar</div>
+              <div class="order-user-sub">📍 Koramangala, 2.1 km · ⭐ New User</div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <span class="badge badge-orange">New Order</span>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">10:32 AM</div>
+          </div>
+        </div>
+        <div class="order-details">
+          <span class="order-detail-item">📱 Samsung Galaxy S21</span>
+          <span class="order-detail-item">🔧 Screen Repair</span>
+          <span class="order-detail-item">📅 Today · 11 AM</span>
+          <span class="order-detail-item">💰 ₹799</span>
+        </div>
+        <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:14px;padding:10px;background:var(--glass);border-radius:var(--radius-md);">
+          💬 "Screen cracked after drop, need urgent repair"
+        </div>
+        <div class="order-actions">
+          <button class="btn btn-success" onclick="handleOrder(this,'accepted')">✅ Accept Order</button>
+          <button class="btn btn-danger" onclick="handleOrder(this,'rejected')">✗ Reject</button>
+          <button class="btn btn-secondary" onclick="showToast('📞 Calling customer...','info')">📞 Call</button>
+        </div>
+      </div>
+
+      <div class="incoming-order-card">
+        <div class="order-header">
+          <div class="order-user">
+            <div class="order-user-avatar">👧</div>
+            <div>
+              <div class="order-user-name">Priya Sharma</div>
+              <div class="order-user-sub">📍 Indiranagar, 3.5 km · ⭐ Regular Customer</div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <span class="badge badge-blue">Accepted</span>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">9:45 AM</div>
+          </div>
+        </div>
+        <div class="order-details">
+          <span class="order-detail-item">💻 Dell Laptop</span>
+          <span class="order-detail-item">🔧 Keyboard Replacement</span>
+          <span class="order-detail-item">📅 Today · 2 PM</span>
+          <span class="order-detail-item">💰 ₹1,299</span>
+        </div>
+        <div class="order-actions">
+          <button class="btn btn-primary" onclick="handleOrderComplete(this)">🚀 Mark Complete</button>
+          <button class="btn btn-secondary" onclick="showToast('📞 Calling customer...','info')">📞 Call</button>
+          <button class="btn btn-secondary" onclick="showToast('💬 Chat opened','info')">💬 Chat</button>
+        </div>
+      </div>
+
+      <div class="incoming-order-card">
+        <div class="order-header">
+          <div class="order-user">
+            <div class="order-user-avatar">👨</div>
+            <div>
+              <div class="order-user-name">Amit Tiwari</div>
+              <div class="order-user-sub">📍 HSR Layout, 4.2 km · ⭐ 5 orders</div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <span class="badge badge-green">In Progress</span>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">8:00 AM</div>
+          </div>
+        </div>
+        <div class="order-details">
+          <span class="order-detail-item">📱 iPhone 14</span>
+          <span class="order-detail-item">🔋 Battery Replacement</span>
+          <span class="order-detail-item">📅 Today · 4 PM</span>
+          <span class="order-detail-item">💰 ₹399</span>
+        </div>
+        <div class="order-actions">
+          <button class="btn btn-primary" onclick="handleOrderComplete(this)">🏁 Complete Job</button>
+          <button class="btn btn-secondary btn-sm" onclick="showToast('📞 Calling customer...','info')">📞 Call</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: MY SERVICES -->
+    <div id="tab-services" style="display:none;">
+      <div class="section-header mb-24">
+        <div><h1 class="text-2xl font-bold">My Services</h1><p class="text-secondary text-sm">Manage your repair services and pricing</p></div>
+        <button class="btn btn-primary btn-sm" onclick="openAddServiceModal()">+ Add Service</button>
+      </div>
+      <div id="servicesList">
+        <div class="service-mgmt-card">
+          <div class="service-mgmt-icon">📱</div>
+          <div class="service-mgmt-info"><div class="service-mgmt-name">Screen Repair</div><div class="service-mgmt-price">₹799 · ~2 hrs</div></div>
+          <span class="badge badge-green">Active</span>
+          <div class="service-mgmt-actions">
+            <button class="btn btn-secondary btn-sm" onclick="showToast('✏️ Edit mode opened','info')">Edit</button>
+            <button class="btn btn-ghost btn-sm" onclick="this.closest('.service-mgmt-card').remove();showToast('🗑️ Service removed','error')">Remove</button>
+          </div>
+        </div>
+        <div class="service-mgmt-card">
+          <div class="service-mgmt-icon">🔋</div>
+          <div class="service-mgmt-info"><div class="service-mgmt-name">Battery Replacement</div><div class="service-mgmt-price">₹399 · ~1 hr</div></div>
+          <span class="badge badge-green">Active</span>
+          <div class="service-mgmt-actions">
+            <button class="btn btn-secondary btn-sm" onclick="showToast('✏️ Edit mode opened','info')">Edit</button>
+            <button class="btn btn-ghost btn-sm" onclick="this.closest('.service-mgmt-card').remove();showToast('🗑️ Service removed','error')">Remove</button>
+          </div>
+        </div>
+        <div class="service-mgmt-card">
+          <div class="service-mgmt-icon">🔌</div>
+          <div class="service-mgmt-info"><div class="service-mgmt-name">Charging Port Fix</div><div class="service-mgmt-price">₹299 · ~1 hr</div></div>
+          <span class="badge badge-green">Active</span>
+          <div class="service-mgmt-actions">
+            <button class="btn btn-secondary btn-sm" onclick="showToast('✏️ Edit mode opened','info')">Edit</button>
+            <button class="btn btn-ghost btn-sm" onclick="this.closest('.service-mgmt-card').remove();showToast('🗑️ Service removed','error')">Remove</button>
+          </div>
+        </div>
+        <div class="service-mgmt-card">
+          <div class="service-mgmt-icon">📷</div>
+          <div class="service-mgmt-info"><div class="service-mgmt-name">Camera Module Repair</div><div class="service-mgmt-price">₹549 · ~2 hrs</div></div>
+          <span class="badge badge-orange">Paused</span>
+          <div class="service-mgmt-actions">
+            <button class="btn btn-secondary btn-sm" onclick="showToast('✅ Service activated','success')">Activate</button>
+            <button class="btn btn-ghost btn-sm" onclick="this.closest('.service-mgmt-card').remove()">Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: EARNINGS -->
+    <div id="tab-earnings" style="display:none;">
+      <div class="section-header mb-24">
+        <div><h1 class="text-2xl font-bold">Earnings</h1><p class="text-secondary text-sm">Your revenue analytics</p></div>
+        <div class="chart-tabs">
+          <button class="chart-tab active" onclick="switchEarningTab(this,'week')">Week</button>
+          <button class="chart-tab" onclick="switchEarningTab(this,'month')">Month</button>
+          <button class="chart-tab" onclick="switchEarningTab(this,'year')">Year</button>
+        </div>
+      </div>
+
+      <div class="grid grid-3 gap-16 mb-24">
+        <div class="stat-card">
+          <div class="stat-label">This Week</div>
+          <div class="stat-value gradient-text">₹28,450</div>
+          <div class="stat-change up">↑ 18% vs last week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">This Month</div>
+          <div class="stat-value gradient-text">₹1,12,800</div>
+          <div class="stat-change up">↑ 9% vs last month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total Jobs</div>
+          <div class="stat-value">234</div>
+          <div class="stat-change up">↑ All-time</div>
+        </div>
+      </div>
+
+      <div class="glass-card p-20 mb-16">
+        <div class="section-title mb-16">Weekly Breakdown</div>
+        <div class="chart-bar">
+          <div class="chart-bar-item"><div class="chart-bar-fill" style="height:55%;"></div><div class="chart-bar-label">Mon<br/><span style="font-size:0.65rem;color:var(--text-muted);">₹3,200</span></div></div>
+          <div class="chart-bar-item"><div class="chart-bar-fill" style="height:75%;"></div><div class="chart-bar-label">Tue<br/><span style="font-size:0.65rem;color:var(--text-muted);">₹4,800</span></div></div>
+          <div class="chart-bar-item"><div class="chart-bar-fill" style="height:40%;"></div><div class="chart-bar-label">Wed<br/><span style="font-size:0.65rem;color:var(--text-muted);">₹2,100</span></div></div>
+          <div class="chart-bar-item"><div class="chart-bar-fill" style="height:95%;background:linear-gradient(to top,#06b6d4,#8b5cf6);"></div><div class="chart-bar-label">Thu<br/><span style="font-size:0.65rem;color:var(--neon-cyan);">₹6,450</span></div></div>
+          <div class="chart-bar-item"><div class="chart-bar-fill" style="height:65%;"></div><div class="chart-bar-label">Fri<br/><span style="font-size:0.65rem;color:var(--text-muted);">₹4,200</span></div></div>
+          <div class="chart-bar-item"><div class="chart-bar-fill" style="height:80%;"></div><div class="chart-bar-label">Sat<br/><span style="font-size:0.65rem;color:var(--text-muted);">₹5,380</span></div></div>
+          <div class="chart-bar-item"><div class="chart-bar-fill" style="height:35%;"></div><div class="chart-bar-label">Sun<br/><span style="font-size:0.65rem;color:var(--text-muted);">₹2,320</span></div></div>
+        </div>
+      </div>
+
+      <div class="glass-card p-20">
+        <div class="section-title mb-16">Recent Transactions</div>
+        <div class="transaction-item">
+          <div class="txn-icon" style="background:rgba(16,185,129,0.15);">📱</div>
+          <div class="txn-info"><div class="txn-name">Screen Repair – Ravi K.</div><div class="txn-date">Today · 11:30 AM · Order #RX001</div></div>
+          <span class="txn-amount txn-credit">+₹799</span>
+        </div>
+        <div class="transaction-item">
+          <div class="txn-icon" style="background:rgba(16,185,129,0.15);">💻</div>
+          <div class="txn-info"><div class="txn-name">Keyboard Replace – Priya S.</div><div class="txn-date">Today · 9:00 AM · Order #RX002</div></div>
+          <span class="txn-amount txn-credit">+₹1,299</span>
+        </div>
+        <div class="transaction-item">
+          <div class="txn-icon" style="background:rgba(239,68,68,0.15);">🏦</div>
+          <div class="txn-info"><div class="txn-name">Platform fee deducted</div><div class="txn-date">Yesterday · Auto · 5%</div></div>
+          <span class="txn-amount txn-debit">-₹104</span>
+        </div>
+        <div class="transaction-item">
+          <div class="txn-icon" style="background:rgba(16,185,129,0.15);">🔋</div>
+          <div class="txn-info"><div class="txn-name">Battery Replace – Suresh M.</div><div class="txn-date">Yesterday · 3:00 PM · Order #RX003</div></div>
+          <span class="txn-amount txn-credit">+₹399</span>
+        </div>
+        <div class="transaction-item">
+          <div class="txn-icon" style="background:rgba(16,185,129,0.15);">🔌</div>
+          <div class="txn-info"><div class="txn-name">Charging Port – Meena J.</div><div class="txn-date">Yesterday · 1:00 PM · Order #RX004</div></div>
+          <span class="txn-amount txn-credit">+₹299</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ADD SERVICE MODAL -->
+<div class="modal-overlay" id="addServiceModal">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h3 class="font-bold text-lg">Add New Service</h3>
+      <button class="btn btn-ghost btn-icon" onclick="closeModal('addServiceModal')">✕</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Service Name</label>
+      <input class="input" type="text" placeholder="e.g. Screen Repair" id="addServiceName"/>
+    </div>
+    <div class="grid grid-2 gap-12">
+      <div class="form-group">
+        <label class="form-label">Price (₹)</label>
+        <input class="input" type="number" placeholder="799" id="addServicePrice"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Est. Duration</label>
+        <select class="input">
+          <option>30 min</option><option>1 hr</option><option selected>2 hrs</option><option>3 hrs</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Device Type</label>
+      <select class="input">
+        <option>📱 Mobile</option><option>💻 Laptop</option><option>🖥️ Tablet</option><option>📺 TV</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:8px;">
+      <button class="btn btn-secondary" style="flex:1;" onclick="closeModal('addServiceModal')">Cancel</button>
+      <button class="btn btn-primary" style="flex:1;" onclick="addService()">Add Service</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
